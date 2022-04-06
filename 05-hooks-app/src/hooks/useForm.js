@@ -15,9 +15,14 @@ export const useForm = ( initialState = {}) => {
         })
     }
 
+    const resetForm = () => {
+        setFormValues( initialState )
+    }
+
     // Lo regresamos como un areglo. También se podría como un objeto.
     return [
         formValues,
-        handleInputChange
+        handleInputChange,
+        resetForm
     ]
 }
