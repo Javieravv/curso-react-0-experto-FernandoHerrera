@@ -9,7 +9,6 @@ export const PrivateRoute = ( { children }) => {
     // Cual es el path que estamos viendo
     const { pathname, search} = useLocation()
     // guardamos en el local storage para
-    
     localStorage.setItem ('lastPath', pathname + search)
 
     return user.logged 

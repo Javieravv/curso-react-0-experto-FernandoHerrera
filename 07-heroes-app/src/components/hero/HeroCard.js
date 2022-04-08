@@ -1,6 +1,7 @@
 // Tarjeta para cada héroe
 
 import { Link } from "react-router-dom"
+import { heroImages } from "../../helpers/heroImages"
 
 export const HeroCard = ({ 
     id, 
@@ -12,13 +13,15 @@ export const HeroCard = ({
 }) => {
 
     const imagePath = `/assets/img/heroes/${id}.jpg`
+
     return (
         <div className = "col animate__animated animate__fadeInRight">
             <div className="card">
                 <div className="row no-gutters">
                     <div className="col-4">
                         <img 
-                            src={imagePath} 
+                            // src={imagePath} 
+                            src={ heroImages (`./${id}.jpg`) } 
                             className="card-img"
                             alt={superhero}
                         />

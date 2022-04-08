@@ -3,6 +3,10 @@
 import React, { useMemo } from 'react'
 import { useParams, Navigate, useNavigate } from 'react-router-dom'
 import { getHeroById } from '../../selectors/getHeroById'
+import { heroImages } from '../../helpers/heroImages'
+
+/// Otra forma para manejar las imágenes si se movieron a la carpeta src y que react
+// pueda controlarlas.
 
 export const HeroScreen = () => {
     // Con este hook recuperamos los parámetrosque tra la url.
@@ -33,13 +37,12 @@ export const HeroScreen = () => {
       characters
     } = hero
 
-    const imagePath = `/assets/img/heroes/${id}.jpg`
-
     return (
       <div className = "row mt-5">
         <div className="col-4">
             <img 
-              src={imagePath} 
+              // src={imagePath} 
+              src = {heroImages (`./${id}.jpg`)}
               alt={superhero}
               className="img-thumbnail animate__animated animate__fadeInLeft"
             />

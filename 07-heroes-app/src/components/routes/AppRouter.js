@@ -6,6 +6,10 @@ import { DashboardRoutes } from './DashboardRoutes'
 import { PrivateRoute } from './PrivateRoute'
 import { PublicRoute } from './PublicRoute'
 
+/**Podrán programarse tantas rutas como se quiera. Dependerá de la lógica
+ * de la aplicacion que se esté manejando.
+ */
+
 export const AppRouter = () => {
   return (
     <BrowserRouter>
