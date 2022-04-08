@@ -7,6 +7,8 @@ import { MarvelScreen } from "../marvel/MarvelScreen"
 import { SearchScreen } from "../search/SearchScreen"
 import { NavBar } from "../ui/NavBar"
 
+/* Estas rutas solo deberían ser visibles si se está autenticado.
+También dependiendo de privilegios de usuario, etc.*/
 
 export const DashboardRoutes = () => {
   return (

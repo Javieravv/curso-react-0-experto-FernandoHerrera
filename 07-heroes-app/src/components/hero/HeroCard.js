@@ -12,7 +12,6 @@ export const HeroCard = ({
 }) => {
 
     const imagePath = `assets/img/heroes/${id}.jpg`
-    console.log (imagePath)
     return (
         <div className = "col animate__animated animate__fadeInRight">
             <div className="card">
