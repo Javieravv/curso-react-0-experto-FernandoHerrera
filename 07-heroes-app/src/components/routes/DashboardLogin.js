@@ -10,7 +10,7 @@ export const DashboardLogin = () => {
             <HeaderLogin />
             <div className="container">
                 <Routes>
-                    <Route path="/" element={<LoginScreen />} />
+                    <Route path="/*" element={<LoginScreen />} />
                 </Routes>
             </div>
         </>

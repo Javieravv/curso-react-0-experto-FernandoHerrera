@@ -1,12 +1,14 @@
+// import { NothingSelected } from "./NothingSelected"
+import { NoteScreen } from "../nodes/NoteScreen"
 import { Sidebar } from "./Sidebar"
 
 export const JournalScreen = () => {
      return (
-          <div className="journal__main-content">
+          <div className = "journal__main-content">
                <Sidebar />
-
                <main >
-                    <h1>Contenido Principal</h1>
+                    {/* <NothingSelected /> */}
+                    <NoteScreen />
                </main>
           </div>
      )

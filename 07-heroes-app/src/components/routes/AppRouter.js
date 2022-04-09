@@ -9,6 +9,17 @@ import { PublicRoute } from './PublicRoute'
 
 /**Podrán programarse tantas rutas como se quiera. Dependerá de la lógica
  * de la aplicacion que se esté manejando.
+ * 
+ * <Route 
+                path="/login" 
+                element={
+                  <PublicRoute>
+                      <DashboardLogin />
+                  </PublicRoute>
+                } 
+            />
+ * 
+ * 
  */
 
 export const AppRouter = () => {
@@ -19,7 +30,7 @@ export const AppRouter = () => {
                 path="/login" 
                 element={
                   <PublicRoute>
-                      <DashboardLogin />
+                      <LoginScreen />
                   </PublicRoute>
                 } 
             />

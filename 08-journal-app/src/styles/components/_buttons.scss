@@ -8,8 +8,13 @@
     font-size: 15px;
     padding: 8px 5px;
 
+    transition: color .3s ease;
     &:focus {
         outline: none;
+    }
+
+    &:hover {
+        color: darken($color: white, $amount: 15);
     }
 }
 
