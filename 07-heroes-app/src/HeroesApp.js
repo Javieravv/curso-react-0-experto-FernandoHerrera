@@ -1,6 +1,7 @@
 import { useEffect, useReducer } from 'react'
 import { AuthContext } from './auth/authContext'
 import { authReducer } from './auth/authReducer'
+import { FooterHero } from './components/encabezado-pie/FooterHero'
 import { AppRouter } from './components/routes/AppRouter'
 
 // Lo que devuelve el init será el estado inicial.
@@ -30,6 +31,7 @@ export const HeroesApp = () => {
             dispatch
         }}>
             <AppRouter />
+            <FooterHero />
         </AuthContext.Provider>
     )
 }

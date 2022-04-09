@@ -15,7 +15,7 @@ export const HeroCard = ({
     const imagePath = `/assets/img/heroes/${id}.jpg`
 
     return (
-        <div className = "col animate__animated animate__fadeInRight">
+        <div className = "col animate__animated animate__lightSpeedInRight">
             <div className="card">
                 <div className="row no-gutters">
                     <div className="col-4">

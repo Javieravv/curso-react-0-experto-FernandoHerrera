@@ -35,7 +35,7 @@ export const SearchScreen = () => {
         <>
             <h1>Búsqueda</h1>   
             <hr />
-            <div className="row">
+            <div className="row mb-3">
                 <div className="col-5">
                     <h4>Buscar Héroes</h4>
                     <hr />

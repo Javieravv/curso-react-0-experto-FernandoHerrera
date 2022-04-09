@@ -47,7 +47,7 @@ export const HeroScreen = () => {
               className="img-thumbnail animate__animated animate__fadeInLeft"
             />
         </div>
-        <div className="col-8 animate__animated animate__fadeInRight">
+        <div className="col-8 animate__animated animate__lightSpeedInRight">
           <h3>{superhero}</h3>
           <ul className="list-group">
               <li className="list-group-item">
