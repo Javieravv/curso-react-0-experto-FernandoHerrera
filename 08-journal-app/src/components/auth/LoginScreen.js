@@ -2,19 +2,20 @@
 
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { login, startGoogleLogin, startLoginEmailPassword } from "../../actions/auth"
+import { startGoogleLogin, startLoginEmailPassword } from "../../actions/auth"
 import { useForm } from "../../hooks/useForm"
 
 export const LoginScreen = () => {
 
      // Con esto es posible hacer dispatch desde cualquier lugar de la aplicación en donde se esté.
      const dispatch = useDispatch()
+     
      // Recuperamos loading
-    const {  loading } = useSelector( state => state.ui)
+     const {  loading } = useSelector( state => state.ui)
 
      const [ formValues, handleInputChange, reset] = useForm ({ 
-          email: 'xavigordillo@gmail.com',
-          password: '1234567'
+          email: '',
+          password: ''
      })
 
      const { email, password } = formValues

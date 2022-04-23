@@ -30,7 +30,6 @@ export const RegisterScreen = () => {
         if ( isFormValid () ) {
             // Si se validó correctamente entonces se creará nuevo usuario en firebase
             // o en el backend que se tenga: Mongo, MySql, archivo plano, etc.
-            console.log ('Formulario correcto')
             dispatch ( startRegisterWithEmailPasswordName (email, password, name) )
 
         }

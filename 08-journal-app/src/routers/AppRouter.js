@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { login } from "../actions/auth";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
+import { startLoadingNotes } from "../actions/notes";
 
 export const AppRouter = () => {
     // Almacenar los datos de autenticación para no perderlos cuando el usuario
@@ -22,10 +23,12 @@ export const AppRouter = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
 
     useEffect( () => {
-        firebase.auth().onAuthStateChanged (  (user) => {
+        firebase.auth().onAuthStateChanged ( async (user) => {
             if (  user?.uid ) {
                 dispatch ( login(user.uid, user.displayName) )
                 setIsLoggedIn (true)
+                // Recuperamos las notas de ese usuario.
+                dispatch ( startLoadingNotes (user.uid) )
             } else {
                 setIsLoggedIn (false)
             }

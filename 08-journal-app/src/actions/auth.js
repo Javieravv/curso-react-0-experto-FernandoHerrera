@@ -13,11 +13,10 @@ export const startLoginEmailPassword = ( email, password) => {
         dispatch (startLoading () )
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then ( ( {user}) => {
-                dispatch(login (user.uid, user.displayName))
+                dispatch (login (user.uid, user.displayName))
                 dispatch (finishLoading ())
             })
             .catch ( e => {
-                console.log (e)
                 dispatch (finishLoading ())
                 Swal.fire ('Error encontrado ', e.message, 'error')
             })
@@ -34,8 +33,7 @@ export const startGoogleLogin = () => {
     return ( dispatch ) => {
         firebase.auth().signInWithPopup( googleAuthProvider)
             .then ( ( { user }) => {
-                dispatch (
-                    login (user.uid, user.displayName)
+                dispatch ( login (user.uid, user.displayName )
                 )
             } )
     }
@@ -50,13 +48,9 @@ export const startRegisterWithEmailPasswordName = (email, password, name) => {
             .then ( async ({ user }) => {
                 // Con esto actualizamos el nombre del usuario
                 await user.updateProfile ( { displayName: name})
-                console.log ('USUARIO', user)
-                dispatch ( 
-                    login (user.uid, user.displayName)
-                )
+                dispatch ( login (user.uid, user.displayName) )
             })
             .catch ( err => {
-                console.log ('ERROR: ', err)
                 Swal.fire ('Error encontrado ', err.message, 'error')
             } )
     }
@@ -71,6 +65,12 @@ export const login = (uid, displayName) => ({
     }
 })
 
+
+export const logout = () => ({
+    type: types.logout
+})
+
+
 // función asíoncrona porque se usa una funcion de firebase que regresa una promesa.|
 export const startLogout = () => {
     return async (dispatch) => {
@@ -78,7 +78,3 @@ export const startLogout = () => {
         dispatch (logout ())
     }
 }
-
-export const logout = () => ({
-    type: types.logout
-})
