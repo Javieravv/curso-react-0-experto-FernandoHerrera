@@ -51,6 +51,9 @@
     border-radius: 5px;
     color: $dark-grey;
     display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 5px;
     margin-bottom: 10px;
     overflow: hidden;
 }
@@ -58,6 +61,11 @@
 .journal__entry-picture {
     height: 75px;
     width: 75px;
+}
+
+.journal__entry-picture img {
+    width: 75px;
+    object-fit: cover;
 }
 
 .journal__entry-body {

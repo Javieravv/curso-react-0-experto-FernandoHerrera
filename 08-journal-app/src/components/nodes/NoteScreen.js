@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { activeNote } from "../../actions/notes"
+import { activeNote, startDeleting } from "../../actions/notes"
 import { useForm } from "../../hooks/useForm"
 import { NotesAppBar } from "./NotesAppBar"
 
@@ -31,6 +31,10 @@ export const NoteScreen = () => {
         dispatch ( activeNote (id, { ...formValues }) )
     }, [ formValues, dispatch])
 
+    const handleDeleteNote = () => {
+        dispatch ( startDeleting ( id ) )
+    }
+
     return (
         <div className="notes__main-content">
             <NotesAppBar />
@@ -55,17 +59,23 @@ export const NoteScreen = () => {
                 </textarea>
 
                 {
-                    // (url) && 
-                    // (
-                    //     <div className="notes__img">
-                    //         <img 
-                    //             src="https://www.surroundslandscaping.com/wp-content/uploads/01-Whang-backyard-seating-03.jpg"
-                    //             alt="Image Landscape"
-                    //         />
-                    //     </div>
-                    // )
+                    (note.url) && 
+                    (
+                        <div className="notes__img">
+                            <img 
+                                src={note.url}
+                                alt="Image Landscape"
+                            />
+                        </div>
+                    )
                 }
             </div>
+            <button
+                className = 'btn btn-danger'
+                onClick = { handleDeleteNote }
+            >
+                Borrar Nota
+            </button>
         </div>
     )
 }

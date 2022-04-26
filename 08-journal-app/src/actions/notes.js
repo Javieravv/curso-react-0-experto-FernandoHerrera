@@ -13,21 +13,25 @@
  */
 import Swal from 'sweetalert2'
 import { db } from "../firebase/firebase-config"
+import { fileUpload } from '../helpers/fileUpload'
 import { loadNotes } from "../helpers/loadNotes"
 import { types } from "../types/types"
 
+// Creamos una nueva nota.
 export const startNewNote = () => {
     return async ( dispatch, getState) => {
         
         const { uid } = getState().auth
         const newNote = {
-            title: 'Primera Nota de las notas', 
-            body: 'Esta es la primera nota de este usuario', 
+            title: '', 
+            body: '', 
             date: new Date().getTime()
         }
         // línea para grabar en Firestore
         const doc = await db.collection(`${ uid }/journal/notes`).add ( newNote )
         dispatch ( activeNote ( doc.id, newNote))
+        dispatch ( addNewNote ( doc.id, newNote))
+
     }
 }
 
@@ -38,6 +42,17 @@ export const activeNote = ( id, note) => ({
         ...note
     }
 })
+
+// Cuando se crea la nueva nota debe poder modificarse
+export const addNewNote = ( id, note ) => ({
+    type: types.notesAddNew,
+    payload: {
+        id, 
+        ...note
+    }
+})
+
+
 
 // con esta acción recuperamos las notas del usuario
 export const startLoadingNotes = (uid) => {
@@ -85,4 +100,45 @@ export const refreshNote = (id, note) => ({
       }
 })
 
+// acción para subir la imagen al backend en la number
+export const startUploading = ( file ) => {
+    return async ( dispatch, getState ) => {
+        const {  active:activeNote} = getState().notes
+        // Mostramos mensaje de uplading...
+        Swal.fire ({
+            title: 'Uploading...', 
+            text: 'Please Wait...',
+            allowOutsideClick: false,
+            willOpen: () => {
+                Swal.showLoading ()
+            }
+        })
+        const fileUrl = await fileUpload ( file )
+        activeNote.url = fileUrl
+        dispatch ( startSaveNote ( activeNote ))
+        Swal.close ()
+    }
+}
 
+// Acción para borrar una nota de una personas determinada.
+export const startDeleting = ( id ) => {
+    return async ( dispatch, getState) => {
+        const uid = getState().auth.uid;
+        await db.doc(`${ uid }/journal/notes/${id}`).delete()
+        // Borramos la nota de la memoria y del store, pues ya se borró de la bd
+        dispatch ( deleteNote ( id ))
+    }
+}
+
+// acción que modifica el store luego de borrada la nota
+// Es una acción síncrona
+export const deleteNote = ( id ) => ({
+    type: types.notesDelete,
+    payload: id
+})
+
+// acción para el logout.
+// El propósito es purgar el store para que se borren los datos que estaban en memoria.
+export const noteLogout = () => ({
+    type: types.notesLogoutCleaning
+})

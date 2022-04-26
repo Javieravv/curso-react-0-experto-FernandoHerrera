@@ -46,6 +46,27 @@ import { types } from "../types/types";
                         : note
                 )
             }
+        case types.notesDelete: 
+            // Borramos una nota y para ello usamos función filter
+            return {
+                ...state, 
+                active: null, 
+                notes: state.notes.filter ( note => note.id !== action.payload)
+            }
+        case types.notesLogoutCleaning:
+            // purgamos el store
+            return {
+                ...state,
+                active: null, 
+                notes: []
+            }
+        case types.notesAddNew: {
+            // añadimos la nueva nota al comienzo
+            return {
+                ...state,
+                notes: [ action.payload, ...state.notes ]
+            }
+        }
         default:
             return state;
     }
