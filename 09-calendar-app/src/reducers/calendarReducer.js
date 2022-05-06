@@ -6,6 +6,7 @@ import { types } from "../types/types"
 const initialState = {
     events: [
         {
+            id: new Date().getTime(),
             title: 'Cumpleaños',
             start: moment().toDate(),
             end: moment().add (2, 'hours').toDate(),
@@ -21,7 +22,6 @@ const initialState = {
 }
 
 export const calendarReducer = ( state = initialState, action) => {
-    console.table (action.payload)
     switch (action.type) {
         case types.eventSetActive:
             return {
@@ -39,6 +39,22 @@ export const calendarReducer = ( state = initialState, action) => {
         case types.eventClearActiveEvent: 
             return {
                 ...state,
+                activeEvent: null
+            }
+        case types.eventUpdated:
+            return {
+                ...state,
+                events: state.events.map (
+                    e =>  (e.id === action.payload.id) ? action.payload : e 
+                )
+            }
+        case types.eventDeleted:
+            // Se borra es la nota activa.
+            return {
+                ...state,
+                events: state.events.filter (
+                    e =>  (e.id !== state.activeEvent.id )
+                ),
                 activeEvent: null
             }
     

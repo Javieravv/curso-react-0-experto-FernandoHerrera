@@ -11,8 +11,9 @@ import { useState } from "react"
 import { CalendarModal } from "./CalendarModal"
 import { useDispatch, useSelector } from "react-redux"
 import { uiOpenModal } from "../../actions/uiActions"
-import { eventSetActive } from "../../actions/eventsActions"
+import { eventClearActiveEvent, eventSetActive } from "../../actions/eventsActions"
 import { AddNewFab } from "../ui/AddNewFab"
+import { DeleteEventFab } from "../ui/DeleteEventFab"
 
 moment.locale ('es')  // para los días en español. 
 const localizer = momentLocalizer(moment)
@@ -20,7 +21,7 @@ const localizer = momentLocalizer(moment)
 export const CalendarScreen = () => {
 
     const dispatch = useDispatch()
-    const { events } = useSelector ( state => state.calendar)
+    const { events, activeEvent } = useSelector ( state => state.calendar)
     const [ lastView, setLastView ] = useState( localStorage.getItem ('lastView') || 'month')
 
     const onDoubleClick = (e) => {
@@ -51,6 +52,11 @@ export const CalendarScreen = () => {
         }
     }
 
+    const onSelectSlot = (e) => {
+        // Cuando se dé click por fuera de un evento, borrar la nota activa.
+        dispatch ( eventClearActiveEvent() )
+    }
+
     return (
       <div className = "calendar-screen">
           <NavBar />
@@ -64,6 +70,8 @@ export const CalendarScreen = () => {
               onDoubleClickEvent = { onDoubleClick }
               onSelectEvent = { onSelectEvent }
               onView = { onViewChange }
+              onSelectSlot = { onSelectSlot }
+              selectable = { true }
               view = { lastView }              
               components=  { {
                   event: CalendarEvent
@@ -71,6 +79,9 @@ export const CalendarScreen = () => {
           />
           <CalendarModal />
           <AddNewFab />
+          { 
+              activeEvent && <DeleteEventFab /> 
+          }
       </div>
     )
 }
