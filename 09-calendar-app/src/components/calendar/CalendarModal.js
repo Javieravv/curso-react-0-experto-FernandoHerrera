@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2'
 import { useDispatch, useSelector } from 'react-redux';
 import { uiCloseModal } from '../../actions/uiActions';
-import { eventAddNew, eventClearActiveEvent, eventUpdated } from '../../actions/eventsActions';
+import { eventClearActiveEvent, eventStartAddNew, eventStartUpdated } from '../../actions/eventsActions';
 
 
 const customStyles = {
@@ -22,6 +22,7 @@ const customStyles = {
 };
 
 Modal.setAppElement('#root');
+
 const now = moment().minutes(0).seconds(0).add(1, 'hours')
 const nowPlus1 = now.clone().add(2, 'hours')
 
@@ -32,28 +33,31 @@ const initEvent = {
     end: nowPlus1.toDate()
 }
 
-export const CalendarModal = () => {
 
-    const dispatch = useDispatch()
+export const CalendarModal = () => {
+    
     const { modalOpen } = useSelector (state => state.ui)
     const { activeEvent } = useSelector (state => state.calendar)
-
-    const [ dateStart, setDateStart ] = useState( now.toDate() )
-    const [ dateEnd, setDateEnd ] = useState( nowPlus1.toDate() )
-    const [titleValid, setTitleValid] = useState(true)
-
-    const [formValues, setFormValues] = useState( initEvent )
+    const dispatch = useDispatch()
+    const [ dateStart, setDateStart ]   = useState( now.toDate() )
+    const [ dateEnd, setDateEnd ]       = useState( nowPlus1.toDate() )
+    
+    const [titleValid, setTitleValid]   = useState(true)
+    const [formValues, setFormValues]   = useState( initEvent )
 
     const { notes, title, start, end } = formValues
+    
 
     // Para estar pendiente de los cambios en el evento y sus datos
     useEffect(() => {
         if ( activeEvent ) {
             setFormValues( activeEvent )
+            setDateStart ( activeEvent.start )
+            setDateEnd ( activeEvent.end )
         } else { 
             setFormValues( initEvent )
         }
-    }, [activeEvent, setFormValues])
+    }, [ activeEvent, setFormValues ])
     
 
     const handleInputChange = ( { target })  => { 
@@ -92,7 +96,6 @@ export const CalendarModal = () => {
     // Con moment se valida mejor la fecha
     const handleSubmitForm = ( e ) => {
         e.preventDefault()
-
         const momentStart = moment (start)
         const momentEnd   = moment ( end )
 
@@ -105,21 +108,13 @@ export const CalendarModal = () => {
             return setTitleValid ( false )
         } 
 
-        // Grabado fictico++++
+        // Grabado real en la base de datos.
         if ( activeEvent ) {
-            dispatch ( eventUpdated( formValues) )
+            dispatch ( eventStartUpdated ( formValues) )
         } else {
-            dispatch ( eventAddNew ({
-                ...formValues,
-                id: new Date().getTime(),  // id ficticio y temporal
-                user: {
-                    _id: '4321',
-                    name: 'Xavier1'
-                }
-            }))
+            dispatch ( eventStartAddNew ( formValues ) )
             // Hasta aquí todo bien
         }
-
 
         setTitleValid ( true )
         closeModal()

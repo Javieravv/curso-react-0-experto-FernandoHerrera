@@ -16,8 +16,7 @@ const Evento = require('../models/Evento')
 
 /**Creamos un nuevo evento. */
  const crearEvento = async (req, res = response) => {
-   
-    // verificar que tenga el evento.
+       // verificar que tenga el evento.
     // Aquí hacemos validaciones importantes.
     // El usuario viene en el Token.
 
@@ -66,6 +65,7 @@ const actualizarEvento = async (req, res = response) => {
          })   
       }
 
+      console.log ('VAMOS BIEN...')
       // Aquí ya se puede editar.
       const nuevoEvento = {
          ...req.body,
@@ -76,7 +76,7 @@ const actualizarEvento = async (req, res = response) => {
 
       return res.json ({
          ok: true,
-         msg: 'EVento Actualizado',
+         msg: 'Evento Actualizado',
          evento: eventoActualizado
      })      
 

@@ -8,7 +8,7 @@ export const CalendarEvent = ( { event } ) => {
     const { title, user, notes } = event
     const { name } = user
     return (
-        <div>
+        <div className = "rbc-calendar">
             <span> { title }</span>
             <strong> - { name }</strong>
             <span>- { notes }</span>

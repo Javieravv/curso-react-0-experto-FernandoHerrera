@@ -1,14 +1,14 @@
 /**Botón flotante para borrar  */
 
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { eventDeleted } from '../../actions/eventsActions'
+import { useDispatch } from 'react-redux'
+import { eventStartDelete } from '../../actions/eventsActions'
 
 export const DeleteEventFab = () => {
     const dispatch = useDispatch ()
 
     const handleDeleteEvent = () => {
-        dispatch ( eventDeleted () )
+        dispatch ( eventStartDelete () )
     }
     return (
         <button
