@@ -65,7 +65,7 @@ export const CalendarScreen = () => {
     }
 
     return (
-      <div className = "calendar-screen">
+      <div className = "calendar-screen animate__animated animate__bounce animate__fadeIn animate__slow">
           <NavBar />
           <Calendar
               localizer={localizer}

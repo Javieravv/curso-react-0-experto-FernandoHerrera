@@ -65,7 +65,6 @@ const actualizarEvento = async (req, res = response) => {
          })   
       }
 
-      console.log ('VAMOS BIEN...')
       // Aquí ya se puede editar.
       const nuevoEvento = {
          ...req.body,
