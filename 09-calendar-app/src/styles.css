@@ -4,10 +4,16 @@ html, body {
     width: 100vw;
 }
 
+.divRouter {
+    /* width: 95%;
+    margin: 0 auto; */
+}
+
 .calendar-screen {
     display: flex;
     flex-flow: column;
     height: 100vh;
+    padding: 5px 35px;
 }
 
 .rbc-calendar {
