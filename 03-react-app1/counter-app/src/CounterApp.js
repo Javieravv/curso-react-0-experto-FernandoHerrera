@@ -13,16 +13,16 @@ const CounterApp = ( { value } ) => {
         setCounter ( counter - 1 )
     }
     const handleRes = (e) => {
-        setCounter ( 0 )
+        setCounter ( 100 )
     }
 
     return (
         <>
             <h1>CounterApp</h1>
             <h2>{ counter }</h2>
-            <button onClick={ handleAdd } >Incrementar</button>
-            <button onClick={ handleSubs }>Decrementar</button>
-            <button onClick={ handleRes }>Resetear</button>
+            <button onClick={ handleAdd } >Incrementar Contador</button>
+            <button onClick={ handleSubs }>Decrementar Contador</button>
+            <button onClick={ handleRes }>Resetear Contador</button>
         </>
     )
 }

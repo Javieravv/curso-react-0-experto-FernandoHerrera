@@ -15,7 +15,7 @@ export const LoginScreen = () => {
                 className="btn btn-primary"
                 onClick={ () => setUser ({
                     id: 654321,
-                    name: 'Xavier',
+                    name: 'Xavier Armando',
                     email: 'xavier@yahoo.jav'
                 }) }
             >

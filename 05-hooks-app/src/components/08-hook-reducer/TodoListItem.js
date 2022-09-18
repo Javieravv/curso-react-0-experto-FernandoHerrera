@@ -23,6 +23,7 @@ export const TodoListItem = ( { todo, i,handleToggle, handleDelete } ) => {
                 </button>
                 <button
                     className='btn btn-dark'
+                    onClick={ () => alert('Modificamos este ToDo') }
                 >
                     Modificar
                 </button>
