@@ -14,9 +14,16 @@ export const GifExpertApp = () => {
         )
     }
 
+    // Eliminar una categoría
+    const onDeleteCategory = ( category ) => {
+        alert (`Vamos a eliminar la cateogoría ${category.toUpperCase()}`)
+        const arrCategories = categories.filter ( cat => cat != category)
+        setCategories ( arrCategories )        
+        console.log ( 'NUEVAS CATEGORIAS...', categories)
+    }
+
     return  (
         <>
-            <h1>Gift Expert App</h1>
             <AddCategory 
                 //setCategories = { setCategories }
                 onNewCategory = { onAddCategories }
@@ -27,6 +34,7 @@ export const GifExpertApp = () => {
                         <GifGrid 
                             category = { category }
                             key = { category  } 
+                            removeCategory = { onDeleteCategory }
                         />
                     ))
                 }

@@ -21,7 +21,8 @@ export const AddCategory = ( { onNewCategory }) => {
     }
 
     return (
-        <div>
+        <div className="divAddCategory">
+            <h1>Gift Expert App</h1>
             <form onSubmit={ onSubmitGif }>
                 <input 
                     type = "text"
