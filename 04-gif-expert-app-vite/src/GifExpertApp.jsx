@@ -19,7 +19,6 @@ export const GifExpertApp = () => {
         alert (`Vamos a eliminar la cateogoría ${category.toUpperCase()}`)
         const arrCategories = categories.filter ( cat => cat != category)
         setCategories ( arrCategories )        
-        console.log ( 'NUEVAS CATEGORIAS...', categories)
     }
 
     return  (

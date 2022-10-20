@@ -16,7 +16,6 @@ export const useFetchGifs = ( category ) => {
     // Evitar que se ejecute el fetch nuevamente.
     useEffect ( ()=> {
         getImages()
-        console.log ('COMPONENTE INICIADO'+category)
     }, []);
   
     return {
