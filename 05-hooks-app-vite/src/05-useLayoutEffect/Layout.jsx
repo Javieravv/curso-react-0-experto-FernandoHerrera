@@ -1,7 +1,8 @@
-import { useCounter, useFetch } from "../hooks"
-import { LoadingQuote, ShowQuote } from "./"
 
-export const MultipleCustomHooks = () => {
+import { useCounter, useFetch } from "../hooks"
+import { LoadingQuote, ShowQuote } from "../03-examples"
+
+export const Layout = () => {
     const { counter, incrementCounter, decrementCounter, resetCounter } = useCounter (1)
     // const { data, isLoading, hasError } = useFetch ('https://www.breakingbadapi.com/api/quotes/1')
 
@@ -11,7 +12,7 @@ export const MultipleCustomHooks = () => {
     
     return (
         <>
-            <h1>The Breaking Bad</h1>
+            <h1>The Breaking Bad (Layaut)</h1>
             <hr />
             {
                 isLoading 
