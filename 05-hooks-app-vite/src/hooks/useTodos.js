@@ -8,7 +8,7 @@ import { todoReducer } from "../10-todoApp"
 
 // Si no hay nada y es nulo, entonces regrese un arreglo vacío.
 const init = () => {
-    return JSON.parse( localStorage.getItem ('todos') || [])
+    return JSON.parse( localStorage.getItem ('todos')) || [ ]
 }
 
 export const useTodos = ( initialState = []) => {
