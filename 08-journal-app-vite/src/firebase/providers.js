@@ -1,5 +1,4 @@
-import { Google } from "@mui/icons-material";
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
 import { FirebaseAuth } from "./configFirebase";
 
 
@@ -49,6 +48,32 @@ export const registeruserWithEmailPassword = async ( { email, password, displayN
         return {
             ok: false,
             errorMessage: error.message
+        }
+    }
+}
+
+export const loginWithEmailPassword =  async ( { email, password }) => {
+    // siginwithemailandpassword
+    console.log ('EMAIL QUE VIENE, ', email)
+    try {
+        const result = await  signInWithEmailAndPassword ( FirebaseAuth, email, password  );
+        // const credentials = GoogleAuthProvider.credentialFromResult ( result )
+        console.log ( { result })
+        const { displayName, photoURL, uid } = result.user;
+        return {
+            ok: true,
+            displayName, 
+            photoURL, 
+            uid
+        }
+        
+    } catch (error) {
+        const errorCode    = error.code;
+        const errorMessage = error.message;
+        return {
+            ok: false,
+            errorCode,
+            errorMessage
         }
     }
 }
