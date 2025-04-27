@@ -1,7 +1,6 @@
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
 import { FirebaseAuth } from "./configFirebase";
 
-
 const googleProvider = new GoogleAuthProvider()
 
 export const signInWithGoogle = async () => {
@@ -76,4 +75,11 @@ export const loginWithEmailPassword =  async ( { email, password }) => {
             errorMessage
         }
     }
+}
+
+// Llamamos el signout en firebase
+
+export const logoutFirebase = async () => {
+    // cierra todas las sesiones.
+    return await FirebaseAuth.signOut()
 }

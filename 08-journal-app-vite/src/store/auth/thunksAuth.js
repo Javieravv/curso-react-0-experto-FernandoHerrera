@@ -2,7 +2,7 @@
  * Usualmente son asíncronas.
  */
 
-import { loginWithEmailPassword, registeruserWithEmailPassword, signInWithGoogle } from "../../firebase/providers"
+import { loginWithEmailPassword, logoutFirebase, registeruserWithEmailPassword, signInWithGoogle } from "../../firebase/providers"
 import { checkingCredentials, login, logout } from "./authSlice"
 
 export const checkingAuthentication = ( email, password ) => {
@@ -38,6 +38,13 @@ export const startLoginWithEmailPassword = ( { email, password } ) => {
         dispatch (checkingCredentials () )
         const { ok, uid, photoURL, displayName, errorMessage } = await loginWithEmailPassword ( { email, password } )
         if ( !ok ) return dispatch ( logout ( { errorMessage } ))
-        dispatch ( login ( { uid, displayName,  photoURL }  ))
+        dispatch ( login ( { uid, displayName,  photoURL, email }  ))
+    }
+}
+
+export const startLogout = () => {
+    return async ( dispatch) => {
+        await logoutFirebase()
+        dispatch ( logout ( { errorMessage: null } )) 
     }
 }
